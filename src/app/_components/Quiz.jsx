@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
 
-const questionOption = {
-  questionOption: "",
-  selected: false,
-};
-
-const defaultVal = {
-  question: "",
-  btn: "single",
-  ansOptions: [questionOption],
-  len: true,
-};
-
 function Quiz() {
+  const questionOption = {
+    questionOption: "",
+    selected: false,
+  };
+
+  const defaultVal = {
+    question: "",
+    btn: "single",
+    ansOptions: [questionOption],
+    len: true,
+  };
   const [val, setVal] = useState({
     question: "",
     btn: "single",
@@ -48,14 +47,8 @@ function Quiz() {
   const handleclick = (e, index) => {
     e.preventDefault();
 
-    // setQue([...que, Number(...(que + 1))]);
-    // console.log("bth", que);
-
     console.log("1111", mainQue[mainQue.length - 1]);
     console.log(mainQue);
-
-    // setRadio(mainQue[mainQue.length - 1].ansOptions.length);
-    // console.log("loploop", mainQue[index].ansOptions.length == 5);
 
     const newQueue = [...mainQue]?.map((que, i) => {
       if (index === i) {
@@ -100,38 +93,15 @@ function Quiz() {
     setMainQue(temp);
   };
 
-  // const handleChildDelete = (index,ind) => {
-  //   const temp = [...mainQue];
-  //   const del = temp[index].ansOptions[ind]
-  //   console.log(del);
-  //   del.splice(ind,1);
-  //   console.log(temp);
-  //   console.log(del,"454454444555");
-  //   // setMainQue(...mainQue,
-  //   //   del);
-  // };
-
   const handleChildDelete = (mainInd, ansInd) => {
     const temp = [...mainQue];
     const del = temp[mainInd].ansOptions;
-    // console.log(del);
-    // const newArray = del.filter((item,index)=>index !== ind)
-    // console.log(newArray);
 
     const onChangeDtaa = [...mainQue]?.map((item, index) => {
       if (index === mainInd) {
         return {
           ...item,
           ansOptions: del.filter((item, index) => index !== ansInd),
-          // ansOptions: [...item?.ansOptions]?.map((option, i) => {
-          //   if (i === ansInd) {
-          //     return {
-          //       ...option,
-          //       questionOption: e?.target?.value,
-          //     };
-          //   }
-          //   return option;
-          // }),
         };
       }
       return item;
@@ -171,7 +141,6 @@ function Quiz() {
       return item;
     });
     setMainQue(onChangeDtaa);
-    // console.log(onChangeDtaa, "sdhasdjhasdjhasdasjhd");
   };
   return (
     <>
@@ -297,11 +266,12 @@ function Quiz() {
                                   className="form-check-input"
                                   type="checkbox"
                                   value=""
-                                  id="defaultCheck1"
+                                  name={`flexRadioDefault${index}`}
+                                  id={`flexCheckDefault${index}${ind}`}
                                 />
                                 <label
                                   className="form-check-label ms-1"
-                                  htmlFor="defaultCheck1"
+                                  htmlFor={`flexCheckDefault${index}${ind}`}
                                 >
                                   Select Answer
                                 </label>
@@ -312,13 +282,12 @@ function Quiz() {
                                   <input
                                     className="form-check-input"
                                     type="radio"
-                                    name={`name_${index}`}
-                                    id="exampleRadios1"
-                                    value="opation 1"
+                                    name={`flexRadioDefault${index}`}
+                                    id={`flexRadioDefault${index}${ind}`}
                                   />
                                   <label
                                     className="form-check-label"
-                                    htmlFor="exampleRadios1"
+                                    for={`flexRadioDefault${index}${ind}`}
                                   >
                                     Select Answer
                                   </label>
